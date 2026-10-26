@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Resumo de Prova - Desenvolvimento de Aplicativos Móveis</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+    @page {
+      size: A4;
+      margin: 14mm 12mm 14mm 12mm;
+    }
+
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: #1e293b;
+      line-height: 1.55;
+      font-size: 11pt;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+    }
+
+    /* Cabeçalho */
+    .header-card {
+      background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+      color: #ffffff;
+      padding: 24px 28px;
+      border-radius: 12px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 12px rgba(30, 58, 138, 0.15);
+    }
+    .header-card h1 {
+      margin: 0 0 6px 0;
+      font-size: 20pt;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+    .header-card .subtitle {
+      font-size: 13pt;
+      font-weight: 500;
+      opacity: 0.95;
+      margin-bottom: 8px;
+    }
+    .header-card .meta {
+      font-size: 9.5pt;
+      opacity: 0.85;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    /* Títulos */
+    h2 {
+      color: #1e3a8a;
+      font-size: 13pt;
+      font-weight: 700;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 6px;
+      margin-top: 24px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    h3 {
+      color: #0f172a;
+      font-size: 11.5pt;
+      font-weight: 600;
+      margin-top: 14px;
+      margin-bottom: 6px;
+    }
+
+    p {
+      margin: 0 0 8px 0;
+    }
+
+    ul, ol {
+      margin: 0 0 10px 0;
+      padding-left: 22px;
+    }
+    li {
+      margin-bottom: 4px;
+    }
+
+    /* Caixas de Alerta e Destaque */
+    .alert-box {
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin: 10px 0;
+      font-size: 10pt;
+      border-left: 4px solid;
+    }
+    .alert-warning {
+      background-color: #fffbeb;
+      border-color: #f59e0b;
+      color: #92400e;
+    }
+    .alert-danger {
+      background-color: #fef2f2;
+      border-color: #ef4444;
+      color: #991b1b;
+    }
+    .alert-success {
+      background-color: #f0fdf4;
+      border-color: #10b981;
+      color: #065f46;
+    }
+    .alert-info {
+      background-color: #f0f9ff;
+      border-color: #0284c7;
+      color: #075985;
+    }
+
+    /* Blocos de Código */
+    pre {
+      background-color: #0f172a;
+      color: #f8fafc;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', Consolas, Monaco, monospace;
+      font-size: 8.5pt;
+      line-height: 1.45;
+      overflow-x: auto;
+      margin: 8px 0 12px 0;
+    }
+    code {
+      font-family: 'JetBrains Mono', Consolas, Monaco, monospace;
+      font-size: 9pt;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      padding: 2px 5px;
+      border-radius: 4px;
+    }
+    pre code {
+      background-color: transparent;
+      color: inherit;
+      padding: 0;
+    }
+
+    /* Tabelas */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 9.5pt;
+    }
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 8px 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #f1f5f9;
+      color: #0f172a;
+      font-weight: 600;
+    }
+    tr:nth-child(even) td {
+      background-color: #f8fafc;
+    }
+
+    /* Cartões de Exercício / Questões */
+    .quest-card {
+      background-color: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    .quest-card .gabarito {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed #cbd5e1;
+      color: #047857;
+      font-size: 9.5pt;
+    }
+
+    .checklist-item {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 6px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 7px;
+      font-size: 7.5pt;
+      font-weight: 700;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .badge-primary { background: #dbeafe; color: #1e40af; }
+    .badge-danger { background: #fee2e2; color: #991b1b; }
+    .badge-success { background: #dcfce7; color: #166534; }
+
+    /* Quebra de página controlada */
+    .no-break {
+      page-break-inside: avoid;
+    }
+    .page-break {
+      page-break-before: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- CABEÇALHO -->
+  <div class="header-card no-break">
+    <h1>Guia Definitivo para a Prova</h1>
+    <div class="subtitle">Desenvolvimento de Aplicativos Móveis (React Native + Expo)</div>
+    <div class="meta">
+      <span><strong>Professor:</strong> MSc. Alex Junior Nunes</span>
+      <span><strong>Instituição:</strong> Universidade Positivo</span>
+      <span><strong>Conteúdo:</strong> 1º Bimestre (Aulas 01 a 16)</span>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 1: TEORIA GERAL -->
+  <div class="no-break">
+    <h2>1. Arquitetura e Ecossistema Mobile</h2>
+    <h3>1.1 Classificação dos Aplicativos</h3>
+    <ul>
+      <li><strong>Nativos:</strong> Desenvolvidos especificamente para o sistema operacional oficial.
+        <ul>
+          <li><strong>iOS:</strong> Linguagens <strong>Swift</strong> e <strong>Objective-C</strong> na IDE <strong>Xcode</strong>.</li>
+          <li><strong>Android:</strong> Linguagens <strong>Kotlin</strong> (oficial desde 2017) e <strong>Java</strong> na IDE <strong>Android Studio</strong>.</li>
+          <li><em>Prós:</em> Alto desempenho e acesso direto aos recursos de hardware. <em>Contras:</em> Duas bases de código separadas.</li>
+        </ul>
+      </li>
+      <li><strong>Híbridos:</strong> Tecnologias web (HTML, CSS, JS) envelopadas em um contêiner nativo / WebView (ex: <strong>Ionic</strong>, <strong>Cordova / PhoneGap</strong>).</li>
+      <li><strong>Web Apps:</strong> Acessados via navegador móvel, responsivos, não instalados na loja.</li>
+      <li><strong>Cross-Platform (Multiplataforma):</strong> Única base de código compartilhada entre Android e iOS:
+        <ul>
+          <li><strong>React Native (Meta/Facebook):</strong> JavaScript/TypeScript + React. Mapeia JSX para views nativas do sistema operacional.</li>
+          <li><strong>Flutter (Google):</strong> Linguagem <strong>Dart</strong>; desenha seus próprios pixels na tela usando engine gráfica (Skia/Impeller).</li>
+          <li><strong>Xamarin (Microsoft):</strong> Linguagem C# com ecossistema .NET.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <div class="alert-box alert-info">
+      <strong>Casos de Mercado (Slide Context):</strong> O <strong>Airbnb</strong> usou React Native por anos e migrou de volta para 100% nativo devido a necessidades extremas de performance e controle de UI de baixo nível. O <strong>Instagram</strong> utiliza React Native em várias telas integradas ao app nativo.
+    </div>
+  </div>
+
+  <div class="no-break">
+    <h3>1.2 Funcionamento Interno do React Native</h3>
+    <ul>
+      <li><strong>React Core:</strong> Modelo de componentes, Virtual DOM e reconciliação.</li>
+      <li><strong>React DOM:</strong> Traduz para elementos Web (<code>&lt;div&gt;</code>, <code>&lt;span&gt;</code>).</li>
+      <li><strong>React Native:</strong> Traduz componentes JSX para views nativas do SO:
+        <ul>
+          <li><code>&lt;View&gt;</code> &rarr; <code>android.view</code> (Android) | <code>UIView</code> (iOS) | <code>&lt;div&gt;</code> (Web).</li>
+          <li><code>&lt;Text&gt;</code> &rarr; <code>TextView</code> (Android) | <code>UITextView</code> (iOS) | <code>&lt;span&gt;/&lt;p&gt;</code> (Web).</li>
+        </ul>
+      </li>
+      <li><strong>JS Engine:</strong> Código JavaScript é executado fora do browser sobre motores como <strong>V8</strong> (Google), <strong>WebKit</strong> (Apple) ou <strong>Hermes</strong> (engine otimizada da Meta).</li>
+    </ul>
+
+    <h3>1.3 Expo: Managed Workflow vs. Bare Workflow</h3>
+    <ul>
+      <li><strong>Managed Workflow (Gerenciado):</strong> O desenvolvedor NÃO mexe nas pastas <code>/android</code> e <code>/ios</code>. O Expo compila e gerencia tudo de forma transparente.</li>
+      <li><strong>Bare Workflow:</strong> O projeto dá acesso total às pastas nativas <code>/android</code> e <code>/ios</code>, permitindo integração direta de código Java, Kotlin ou Swift.</li>
+      <li><strong>Comandos Essenciais:</strong> <code>npx create-expo-app nome --template</code> (selecionando minimal com bare) e <code>npx expo start</code> (com Fast Refresh).</li>
+    </ul>
+  </div>
+
+  <!-- SEÇÃO 2: MÓDULOS E ESTRUTURA -->
+  <div class="no-break">
+    <h2>2. Módulos ECMAScript, Fragmentos e Pastas</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Tipo de Export</th>
+          <th>Sintaxe de Declaração</th>
+          <th>Sintaxe de Importação</th>
+          <th>Regras</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Default</strong></td>
+          <td><code>export default function App() {}</code></td>
+          <td><code>import App from './App'</code></td>
+          <td>Apenas 1 por arquivo; importa <strong>sem chaves</strong> e pode renomear.</td>
+        </tr>
+        <tr>
+          <td><strong>Nomeado</strong></td>
+          <td><code>export function Botao() {}</code></td>
+          <td><code>import { Botao } from './Botao'</code></td>
+          <td>Vários por arquivo; exige <strong>chaves <code>{}</code></strong> com o nome exato.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert-box alert-warning">
+      <strong>Fragmentos (<code>&lt;React.Fragment&gt;</code> ou <code>&lt;&gt;...&lt;/&gt;</code>):</strong> Servem para agrupar múltiplos componentes filhos adjacentes sem criar um elemento visual a mais (como uma <code>&lt;View&gt;</code> extra) na árvore de layout nativa.
+    </div>
+  </div>
+
+  <!-- SEÇÃO 3: FLEXBOX -->
+  <div class="page-break"></div>
+  <div class="no-break">
+    <h2>3. Flexbox no React Native (Regras e Pegadinhas)</h2>
+    <div class="alert-box alert-danger">
+      <strong>REGRA CRUCIAL:</strong> No React Native, o <code>flexDirection</code> padrão é <strong><code>column</code></strong> (vertical), diferente do CSS web tradicional (onde o padrão é <code>row</code>).
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Propriedade</th>
+          <th>Eixo de Atuação</th>
+          <th>Valores</th>
+          <th>Comportamento / Pegadinha de Prova</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong><code>flexDirection</code></strong></td>
+          <td>Define os eixos</td>
+          <td><code>'column'</code> (padrão), <code>'row'</code></td>
+          <td>Determina quem é o Eixo Principal (Main Axis) e o Eixo Transversal (Cross Axis).</td>
+        </tr>
+        <tr>
+          <td><strong><code>justifyContent</code></strong></td>
+          <td><strong>Eixo Principal</strong></td>
+          <td><code>'flex-start'</code>, <code>'center'</code>, <code>'flex-end'</code>, <code>'space-between'</code>, <code>'space-around'</code>, <code>'space-evenly'</code></td>
+          <td>Se <code>flexDirection: 'column'</code>, alinha na vertical. Se <code>'row'</code>, alinha na horizontal.</td>
+        </tr>
+        <tr>
+          <td><strong><code>alignItems</code></strong></td>
+          <td><strong>Eixo Transversal</strong></td>
+          <td><code>'flex-start'</code>, <code>'center'</code>, <code>'flex-end'</code>, <code>'stretch'</code></td>
+          <td><strong>Atenção:</strong> <code>'stretch'</code> só estica o item se ele <strong>NÃO</strong> tiver tamanho transversal fixo (width ou height).</td>
+        </tr>
+        <tr>
+          <td><strong><code>flexWrap</code></strong></td>
+          <td>Quebra de linha</td>
+          <td><code>'nowrap'</code> (padrão), <code>'wrap'</code></td>
+          <td><code>'nowrap'</code> espreme os itens; <code>'wrap'</code> quebra automaticamente para a próxima linha/coluna.</td>
+        </tr>
+        <tr>
+          <td><strong><code>flex: 1</code></strong></td>
+          <td>Proporção</td>
+          <td>Número</td>
+          <td>Atalho para <code>flex-grow: 1, flex-shrink: 1, flex-basis: 0%</code>. Divide o espaço restante proporcionalmente.</td>
+        </tr>
+        <tr>
+          <td><strong><code>flexGrow</code></strong></td>
+          <td>Expansão</td>
+          <td>Número</td>
+          <td>Decide quem cresce quando <strong>SOBRA</strong> espaço no contêiner.</td>
+        </tr>
+        <tr>
+          <td><strong><code>flexShrink</code></strong></td>
+          <td>Compressão</td>
+          <td>Número</td>
+          <td>Decide quem encolhe quando <strong>FALTA</strong> espaço. <strong><code>flexShrink: 0</code></strong> se recusa a encolher.</td>
+        </tr>
+        <tr>
+          <td><strong><code>flexBasis</code></strong></td>
+          <td>Tamanho Base</td>
+          <td>px ou %</td>
+          <td>Tamanho inicial do elemento antes de distribuir o espaço livre.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SEÇÃO 4: IMAGENS, ÍCONES E PLATFORM -->
+  <div class="no-break">
+    <h2>4. Imagens, Ícones e Plataforma (OS)</h2>
+    <h3>4.1 Imagens Locais vs. Remotas (<code>&lt;Image&gt;</code>)</h3>
+    <pre><code>// 1. Imagem Local (estática via Metro)
+&lt;Image source={require('./assets/logo.png')} style={{ width: 100, height: 100 }} /&gt;
+
+// 2. Imagem Remota (URL de rede)
+&lt;Image source={{ uri: 'https://exemplo.com/foto.jpg' }} style={{ width: 100, height: 100 }} /&gt;</code></pre>
+
+    <div class="alert-box alert-danger">
+      <strong>PEGADINHA DE PROVA:</strong> Em imagens remotas (<code>uri</code>), <strong>é obrigatório informar largura (width) e altura (height)</strong> no estilo. Se você não informar, o React Native não consegue adivinhar as dimensões da rede e a imagem fica com tamanho 0x0 (não aparece na tela!).
+    </div>
+    <ul>
+      <li><strong><code>resizeMode</code>:</strong> <code>'cover'</code> (preenche cortando), <code>'contain'</code> (mostra tudo sem cortar), <code>'stretch'</code> (estica), <code>'center'</code>.</li>
+      <li><strong>Avatar Circular:</strong> Para uma imagem de 100x100 virar um círculo perfeito, use <code>borderRadius: 50</code> (exatamente a metade do tamanho).</li>
+      <li><strong>Ícones (<code>@expo/vector-icons</code>):</strong> <code>&lt;Feather name="user" size={20} color="#fff" /&gt;</code>.</li>
+    </ul>
+
+    <h3>4.2 Diferenciação de SO com <code>Platform</code></h3>
+    <pre><code>import { Platform, StyleSheet } from 'react-native';
+
+const estilos = StyleSheet.create({
+  card: {
+    backgroundColor: '#fff',
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 4,
+      },
+      android: {
+        elevation: 6, // Android usa EXCLUSIVAMENTE elevation para sombras
+      },
+    }),
+  }
+});</code></pre>
+  </div>
+
+  <!-- SEÇÃO 5: SCROLLVIEW VS FLATLIST -->
+  <div class="page-break"></div>
+  <div class="no-break">
+    <h2>5. Listas e Performance: ScrollView vs. FlatList</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Critério</th>
+          <th><code>&lt;ScrollView&gt;</code></th>
+          <th><code>&lt;FlatList&gt;</code></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Renderização</strong></td>
+          <td>Desenha <strong>TODOS</strong> os itens de uma vez na memória, visíveis ou não.</td>
+          <td>Usa <strong>Virtualização</strong>: só renderiza o que está no viewport da tela (e recicla componentes).</td>
+        </tr>
+        <tr>
+          <td><strong>Uso Indicado</strong></td>
+          <td>Telas curtas, estáticas ou formulários (~10 a 20 itens).</td>
+          <td>Listas longas, dinâmicas ou infinitas (centenas ou milhares de itens).</td>
+        </tr>
+        <tr>
+          <td><strong>Histórico</strong></td>
+          <td>Nativo do core.</td>
+          <td>Substituiu o antigo <code>ListView</code>, que foi <strong>removido</strong> do React Native em 2017.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>As 3 Props Essenciais da <code>FlatList</code>:</h3>
+    <pre><code>&lt;FlatList
+  data={CONTATOS}                                    // 1. Array com os dados em memória
+  keyExtractor={(item) => item.id.toString()}        // 2. Devolve string única por item
+  renderItem={({ item }) => &lt;ItemContato item={item} /&gt;} // 3. Devolve o JSX de cada linha
+/&gt;</code></pre>
+
+    <h3>Props Estruturais de UI da <code>FlatList</code>:</h3>
+    <ul>
+      <li><code>ListHeaderComponent</code>: Componente fixo no topo da lista.</li>
+      <li><code>ListFooterComponent</code>: Componente fixo no final da lista.</li>
+      <li><code>ItemSeparatorComponent</code>: Elemento desenhado <strong>apenas ENTRE</strong> os itens (nunca antes do 1º e nem depois do último).</li>
+      <li><code>ListEmptyComponent</code>: Renderizado automaticamente quando <code>data = []</code>.</li>
+      <li><code>horizontal={true}</code>: Cria lista com rolagem horizontal.</li>
+    </ul>
+  </div>
+
+  <!-- SEÇÃO 6: COMUNICAÇÃO ENTRE COMPONENTES -->
+  <div class="no-break">
+    <h2>6. Comunicação entre Componentes e Destructuring</h2>
+    <div class="alert-box alert-success">
+      <strong>REGRA FUNDAMENTAL:</strong> <em>"Dados descem, Eventos sobem"</em>.
+    </div>
+    <ul>
+      <li><strong>Direta (Pai &rarr; Filho):</strong> Passagem via <strong><code>props</code></strong>. Via de mão única: o filho recebe os dados, apenas lê e <strong>nunca altera diretamente</strong> a prop recebida.</li>
+      <li><strong>Direta (Filho &rarr; Pai):</strong> O pai passa uma <strong>função de callback</strong> como prop para o filho (ex: <code>aoPressionar={salvar}</code>). O filho executa a função ao disparar um evento (ex: clique). O filho apenas avisa que o evento ocorreu.</li>
+      <li><strong>Indireta & Prop Drilling:</strong> Quando o dado está no componente Avô e precisa chegar no Neto/Bisneto, componentes intermediários são forçados a repassar props que eles não utilizam. Isso gera código frágil e motivou a criação do <strong>Redux</strong> e da <strong>Context API</strong>.</li>
+    </ul>
+
+    <h3>Destructuring de Objetos (ES6)</h3>
+    <pre><code>const aluno = { nome: 'Higor', curso: 'ADS', endereco: { cidade: 'Curitiba' } };
+
+// 1. Extração simples
+const { nome, curso } = aluno;
+
+// 2. Renomeação de variável
+const { nome: nomeAluno } = aluno; // cria a variável 'nomeAluno' com o valor 'Higor'
+
+// 3. Valor padrão (fallback caso a chave não exista)
+const { apelido = 'Sem apelido' } = aluno;
+
+// 4. Aninhado
+const { endereco: { cidade } } = aluno; // extrai a cidade diretamente</code></pre>
+  </div>
+
+  <!-- SEÇÃO 7: HOOKS -->
+  <div class="page-break"></div>
+  <div class="no-break">
+    <h2>7. Hooks: useState, TextInput e useEffect</h2>
+    <h3>7.1 Hook <code>useState</code></h3>
+    <p>Variáveis comuns (<code>let contador = 0</code>) mudam seu valor no JavaScript, mas <strong>não avisam o React</strong>. Para que uma alteração reflita na tela, é obrigatório usar estado reativo.</p>
+    <pre><code>const [contador, setContador] = useState(0);</code></pre>
+    <ul>
+      <li>Retorna um array com exatamente 2 elementos:
+        <ul>
+          <li><code>[0]</code> (ex: <code>contador</code>): O valor atual do estado (<strong>somente leitura</strong>).</li>
+          <li><code>[1]</code> (ex: <code>setContador</code>): A função atualizadora que agenda o re-render do componente.</li>
+        </ul>
+      </li>
+    </ul>
+    <div class="alert-box alert-danger">
+      <strong>REGRA DE OURO:</strong> Nunca altere o estado diretamente! <code>contador++</code> ou <code>contador = contador + 1</code> é <strong>completamente errado</strong>. Sempre use a função set: <code>setContador(contador + 1)</code>.
+    </div>
+
+    <h3>7.2 Inputs: Não Controlado vs. Controlado (<code>&lt;TextInput&gt;</code>)</h3>
+    <pre><code>const [email, setEmail] = useState('');
+
+&lt;TextInput
+  value={email}                       // Torna o input controlado pelo estado
+  onChangeText={setEmail}             // Recebe o texto digitado diretamente (sem event.target)
+  placeholder="Digite seu email"      // Texto informativo enquanto vazio
+  keyboardType="email-address"        // Tipo de teclado ('numeric', 'email-address')
+  secureTextEntry={false}             // Se true, esconde os caracteres com bolinhas (senhas)
+  multiline={false}                   // Permite múltiplas linhas
+  autoCapitalize="none"               // Controle de maiúsculas ('words', 'none')
+/&gt;</code></pre>
+
+    <h3>7.3 Hook <code>useEffect</code> (Efeitos Colaterais)</h3>
+    <p>Um <strong>efeito colateral (side effect)</strong> é qualquer código que interage com o mundo fora do cálculo puro do componente: chamadas de API (<code>fetch</code>), temporizadores (<code>setInterval</code>), ouvintes de eventos e leitura/escrita em armazenamento local.</p>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>Sintaxe</th>
+          <th>Comportamento do Ciclo de Vida</th>
+          <th>Cenário de Uso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>useEffect(fn)</code><br><em>(sem array)</em></td>
+          <td>Executa após <strong>toda e qualquer</strong> renderização.</td>
+          <td>Raríssimo. Risco crítico de <strong>loop infinito</strong> se alterar estado dentro dele.</td>
+        </tr>
+        <tr>
+          <td><code>useEffect(fn, [])</code><br><em>(array vazio)</em></td>
+          <td>Executa <strong>uma única vez</strong>, logo após o componente ser montado.</td>
+          <td><strong>Padrão ouro</strong> para buscar dados em API (<code>fetch</code>) ao abrir a tela.</td>
+        </tr>
+        <tr>
+          <td><code>useEffect(fn, [valor])</code><br><em>(com dependências)</em></td>
+          <td>Executa na montagem e <strong>sempre que <code>valor</code> mudar</strong>.</td>
+          <td>Recalcular ou recarregar dados quando um filtro, id ou estado específico for alterado.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert-box alert-warning">
+      <strong>Função de Limpeza (Cleanup):</strong> Quando o <code>useEffect</code> retorna uma função (<code>return () =&gt; clearInterval(id)</code>), ela é executada antes do efeito rodar novamente e no momento em que a tela é <strong>desmontada</strong>. Serve para desligar timers e evitar vazamento de memória (<em>memory leaks</em>).
+    </div>
+  </div>
+
+  <!-- SEÇÃO 8: NAVEGAÇÃO -->
+  <div class="page-break"></div>
+  <div class="no-break">
+    <h2>8. Navegação com React Navigation</h2>
+    <p>O <code>&lt;NavigationContainer&gt;</code> da biblioteca <code>@react-navigation/native</code> é obrigatório e deve envolver toda a estrutura de rotas na raiz (<code>App.js</code>).</p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Navegador</th>
+          <th>Biblioteca</th>
+          <th>Conceito / Metáfora</th>
+          <th>Quando Usar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Stack</strong></td>
+          <td><code>@react-navigation/native-stack</code></td>
+          <td>Pilha de cartas (LIFO - Último a entrar é o primeiro a sair).</td>
+          <td>Fluxos sequenciais: Lista &rarr; Detalhes &rarr; Formulário de Edição.</td>
+        </tr>
+        <tr>
+          <td><strong>Bottom Tabs</strong></td>
+          <td><code>@react-navigation/bottom-tabs</code></td>
+          <td>Abas fixas na parte inferior da tela.</td>
+          <td>Seções principais que o usuário alterna frequentemente (Home, Busca, Perfil).</td>
+        </tr>
+        <tr>
+          <td><strong>Drawer</strong></td>
+          <td><code>@react-navigation/drawer</code></td>
+          <td>Menu lateral deslizante (gaveta).</td>
+          <td>Opções secundárias ou administrativas (Configurações, Termos, Sair).</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="alert-box alert-info">
+      <strong>Dependências do Drawer:</strong> Para animação suave e gestos de arrasto, o Drawer exige obrigatoriamente: <code>react-native-gesture-handler</code> e <code>react-native-reanimated</code>.
+    </div>
+
+    <h3>Ações das Props <code>navigation</code> e <code>route</code>:</h3>
+    <ul>
+      <li><code>navigation.navigate('Tela', { id: 10 })</code>: Empilha/abre a tela informada e passa dados adicionais.</li>
+      <li><code>navigation.goBack()</code>: Desempilha a tela do topo e exibe a anterior com o estado preservado.</li>
+      <li><code>navigation.popToTop()</code>: Volta diretamente para a primeira tela da pilha.</li>
+      <li><code>navigation.openDrawer()</code> / <code>closeDrawer()</code>: Abre ou fecha a gaveta lateral por código.</li>
+      <li><code>navigation.getParent('NomeDoStack')?.navigate('Tela')</code>: Acessa o navegador pai em navegações aninhadas.</li>
+      <li><strong>Recebendo parâmetros na tela de destino:</strong>
+        <pre><code>function TelaDetalhes({ route }) {
+  const { id, nome } = route.params || {}; // Destructuring direto dos parâmetros recebidos
+  return &lt;Text&gt;{nome}&lt;/Text&gt;;
+}</code></pre>
+      </li>
+      <li><strong>Customização:</strong> <code>screenOptions</code> (no Navigator) define o padrão para todas as telas; <code>options</code> (no Screen) customiza uma tela específica e tem <strong>prioridade</strong>.</li>
+    </ul>
+  </div>
+
+  <!-- SEÇÃO 9: VÍDEOS -->
+  <div class="no-break">
+    <h2>9. Recursos Multimídia: Vídeo com <code>expo-video</code></h2>
+    <ul>
+      <li><strong>Padrão Oficial Atual:</strong> O antigo componente <code>Video</code> do <code>expo-av</code> foi <strong>descontinuado</strong>. O padrão moderno do ecossistema Expo é o <strong><code>expo-video</code></strong>.</li>
+      <li><strong>Duas Peças Fundamentais:</strong>
+        <ol>
+          <li><code>useVideoPlayer(fonte, callbackConfig)</code>: O <strong>cérebro</strong>. Controla reprodução (<code>play()</code>, <code>pause()</code>), repetição (<code>loop = true</code>), som (<code>muted = true</code>) e status (<code>playing</code>).</li>
+          <li><code>&lt;VideoView player={player} /&gt;</code>: A <strong>tela</strong>. Componente visual que exibe o vídeo e suporta estilos, bordas, tela cheia e PiP.</li>
+        </ol>
+      </li>
+      <li><strong>Vídeo Local vs. Remoto:</strong>
+        <ul>
+          <li>Local: <code>const fonte = require('../assets/video.mp4')</code> (empacotado pelo Metro Bundler).</li>
+          <li>Remoto: <code>const fonte = 'https://site.com/video.mp4'</code> (string URL comum).</li>
+        </ul>
+      </li>
+      <li><strong>Props do <code>&lt;VideoView&gt;</code>:</strong> <code>contentFit="contain"</code> (ou <code>cover</code>), <code>nativeControls={false}</code>, <code>allowsFullscreen</code> e <code>allowsPictureInPicture</code>.</li>
+    </ul>
+  </div>
+
+  <!-- SEÇÃO 10: SIMULADO DE PROVA -->
+  <div class="page-break"></div>
+  <div class="no-break">
+    <h2>10. Simulado de Prova com Gabarito Comentado</h2>
+
+    <div class="quest-card">
+      <p><strong>Questão 1:</strong> No Flexbox do React Native, qual é o valor padrão da propriedade <code>flexDirection</code> e como o <code>alignItems: 'stretch'</code> se comporta?</p>
+      <div class="gabarito">
+        <strong>Gabarito Comentado:</strong> O valor padrão é <strong><code>'column'</code></strong> (disposição vertical). O valor <code>'stretch'</code> no <code>alignItems</code> estica os elementos ao longo do eixo transversal para preencher o contêiner, mas só terá efeito se os itens <strong>não tiverem dimensão transversal fixa</strong> (largura no caso de coluna, ou altura no caso de linha).
+      </div>
+    </div>
+
+    <div class="quest-card">
+      <p><strong>Questão 2:</strong> Por que a renderização de uma imagem remota com <code>&lt;Image source={{ uri: '...' }} /&gt;</code> exige que largura e altura sejam declaradas explicitamente no estilo?</p>
+      <div class="gabarito">
+        <strong>Gabarito Comentado:</strong> Diferente das imagens locais carregadas via <code>require()</code> (onde o empacotador Metro inspeciona o arquivo e calcula suas dimensões em tempo de build), imagens de rede não têm suas dimensões conhecidas previamente. Sem largura e altura explícitas, o layout assume dimensões 0x0 e a imagem não é exibida na tela.
+      </div>
+    </div>
+
+    <div class="quest-card">
+      <p><strong>Questão 3:</strong> Diferencie <code>&lt;ScrollView&gt;</code> de <code>&lt;FlatList&gt;</code> sob a ótica de renderização e consumo de memória do dispositivo móvel.</p>
+      <div class="gabarito">
+        <strong>Gabarito Comentado:</strong> O <code>&lt;ScrollView&gt;</code> instancia e desenha todos os itens da lista simultaneamente na memória RAM, independentemente de estarem ou não visíveis no display, causando lentidão e travamentos em listas grandes. Já a <code>&lt;FlatList&gt;</code> utiliza <strong>virtualização</strong>, mantendo em memória e desenhando na tela apenas os itens visíveis no viewport (e uma pequena margem de buffer), reciclando componentes durante o scroll e garantindo alta performance mesmo com milhares de registros.
+      </div>
+    </div>
+
+    <div class="quest-card">
+      <p><strong>Questão 4:</strong> Um aluno escreveu o seguinte código para incrementar um contador:</p>
+      <pre><code>const [contador, setContador] = useState(0);
+function aoClicar() {
+  contador = contador + 1;
+}</code></pre>
+      <p>Por que a tela não atualiza o número exibido quando o usuário clica no botão?</p>
+      <div class="gabarito">
+        <strong>Gabarito Comentado:</strong> Porque o estado do React é imutável e a variável <code>contador</code> é tratada como somente leitura. Alterar a variável diretamente não notifica o motor do React. Para disparar a re-renderização do componente e atualizar a interface gráfica, deve-se obrigatoriamente chamar a função atualizadora: <code>setContador(contador + 1)</code>.
+      </div>
+    </div>
+
+    <div class="quest-card">
+      <p><strong>Questão 5:</strong> Para carregar dados de uma API externa (via <code>fetch</code>) assim que o usuário abre a tela, como deve ser configurado o hook <code>useEffect</code>?</p>
+      <div class="gabarito">
+        <strong>Gabarito Comentado:</strong> O hook deve ser configurado com um <strong>array de dependências vazio (<code>[]</code>)</strong> no segundo argumento: <code>useEffect(() =&gt; { fetchDados(); }, [])</code>. Isso garante que a função executará exatamente uma vez após a montagem inicial do componente, prevenindo loops infinitos de requisições.
+      </div>
+    </div>
+
+    <div class="quest-card">
+      <p><strong>Questão 6:</strong> Quais são os 3 navegadores fundamentais do React Navigation e quando cada um deve ser adotado?</p>
+      <div class="gabarito">
+        <strong>Gabarito Comentado:</strong>
+        1. <strong>Stack Navigator:</strong> Navegação empilhada linear (LIFO), com botão de voltar automático. Ideal para fluxos como Lista &rarr; Detalhe &rarr; Checkout.<br>
+        2. <strong>Bottom Tab Navigator:</strong> Abas fixas na parte inferior. Ideal para alternar rapidamente entre as áreas principais do app.<br>
+        3. <strong>Drawer Navigator:</strong> Menu lateral deslizante (gaveta). Ideal para opções secundárias, menus de perfil, configurações ou saídas.
+      </div>
+    </div>
+  </div>
+
+  <!-- SEÇÃO 11: RESUMO RÁPIDO DE 5 MINUTOS -->
+  <div class="no-break">
+    <h2>11. Checklist Rápido de 5 Minutos (Decoreba Estratégica)</h2>
+    <div class="checklist-item">
+      <span class="badge badge-danger">1. Sem HTML</span>
+      <span>Nada de <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code> ou <code>&lt;span&gt;</code>. Use <code>&lt;View&gt;</code> e <code>&lt;Text&gt;</code>.</span>
+    </div>
+    <div class="checklist-item">
+      <span class="badge badge-danger">2. Texto</span>
+      <span>Todo texto OBRIGATORIAMENTE deve estar encapsulado dentro de <code>&lt;Text&gt;</code>.</span>
+    </div>
+    <div class="checklist-item">
+      <span class="badge badge-primary">3. Flexbox</span>
+      <span>Eixo padrão é SEMPRE <code>flexDirection: 'column'</code>. <code>justifyContent</code> = eixo principal; <code>alignItems</code> = transversal.</span>
+    </div>
+    <div class="checklist-item">
+      <span class="badge badge-primary">4. Comunicação</span>
+      <span>Dados descem (Pai &rarr; Filho por props); Eventos sobem (Filho &rarr; Pai por callbacks).</span>
+    </div>
+    <div class="checklist-item">
+      <span class="badge badge-warning">5. Prop Drilling</span>
+      <span>Repasse excessivo de props por componentes do meio que não as usam. Resolvido por Context / Redux.</span>
+    </div>
+    <div class="checklist-item">
+      <span class="badge badge-success">6. FlatList</span>
+      <span>As 3 props obrigatórias: <code>data</code>, <code>renderItem</code> e <code>keyExtractor</code>.</span>
+    </div>
+    <div class="checklist-item">
+      <span class="badge badge-primary">7. Sombras</span>
+      <span>iOS usa <code>shadowColor/Offset/Opacity/Radius</code>. Android usa apenas <code>elevation</code>.</span>
+    </div>
+    <div class="checklist-item">
+      <span class="badge badge-danger">8. Estado</span>
+      <span>Nunca faça <code>contador++</code>. Sempre use <code>setContador(...)</code>.</span>
+    </div>
+    <div class="checklist-item">
+      <span class="badge badge-primary">9. useEffect</span>
+      <span>Sem array = roda sempre (loop). Array vazio <code>[]</code> = roda 1x na montagem. Return = função cleanup.</span>
+    </div>
+    <div class="checklist-item">
+      <span class="badge badge-success">10. Navegação</span>
+      <span>Raiz sempre envolve <code>&lt;NavigationContainer&gt;</code>. Stack (pilha), Tabs (abas), Drawer (gaveta).</span>
+    </div>
+    <div class="checklist-item">
+      <span class="badge badge-primary">11. Vídeo</span>
+      <span><code>expo-video</code> é a biblioteca atual (substituiu o <code>expo-av</code> descontinuado). <code>useVideoPlayer</code> comanda; <code>&lt;VideoView&gt;</code> exibe.</span>
+    </div>
+  </div>
+
+</body>
+</html>
