@@ -35,6 +35,31 @@ export default function ListaTarefas({navigation}){
         }
     }
 
+    async function alternarConcluida(tarefa){
+        //Atualização "otimista"altera primerio o local e depois o servidor/API
+        console.log("Entrou na alternarConcluida");
+        console.log("Tarefa: ", JSON.stringify(tarefa));
+        // Atualizando a tarefa na interface
+        setTasks((atuais) =>
+            atuais.map((t) => (t.id == tarefa.id ? {...t, concluida: !tarefa.concluida} : t))
+        )
+        //Atualizando a tarefa na API
+        try{
+            //setCarregando(true)
+            const resp = await fetch(`${API_URL}/tarefas/${tarefa.id}/concluir`, {method: `PATCH`});
+            if(!resp.ok){
+                throw new Error("Falha ao atualizar no servidor");
+            }
+        }catch(err){
+            setTasks((atuais) => atuais.map ((t) => (t.id === tarefa.id ?
+                {...t, concluida : tarefa.concluida} : t)
+                )
+            )
+        }finally{
+            setCarregando(false);
+        }
+    }
+
     //Garante que sera executada uma unica vez a getTasks quando a pagina é renderizada
     useEffect(()=>{
         getTasks();
@@ -57,7 +82,8 @@ export default function ListaTarefas({navigation}){
             <FlatList 
                 data={tasks}
                 keyExtractor={(item) => item.id}
-                renderItem={({item})=>(<Text>{item.titulo}</Text>)}
+                renderItem={({item})=>(<TouchableOpacity onPress={()=>alternarConcluida(item)}><Text>{item.titulo} | {item.concluido ?
+                'Sim': 'Não'}</Text></TouchableOpacity>)}
             />
             <TouchableOpacity
                 onPress={()=> navigation.navigate('NovaTarefa')}
